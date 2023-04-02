@@ -22,21 +22,24 @@ public class UserEntity extends AbsEntity implements UserDetails {
     @Column(nullable = false)
     private String fullName;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
     private String password;
     @Column
+    private String emailCode;
+    @Column
     private boolean enabled = false;
     @Column
     @Enumerated(EnumType.STRING)
     private Colors color;
-    @Column(nullable = false)
+    @Column
     private String initialLetter;
     @OneToOne(fetch = FetchType.LAZY)
     private Attachment avatar;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private SystemRole role;
 
     @Override
