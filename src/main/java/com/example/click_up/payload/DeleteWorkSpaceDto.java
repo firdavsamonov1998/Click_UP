@@ -9,10 +9,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
-public class ResponseRegisterDto {
-    private String email;
-    private String fullName;
-    private boolean success;
+public class DeleteWorkSpaceDto {
     private Integer statusCode;
     private String message;
 }

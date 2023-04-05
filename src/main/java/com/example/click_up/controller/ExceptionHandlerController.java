@@ -1,7 +1,7 @@
 package com.example.click_up.controller;
 
 
-import com.example.click_up.exception.UserNameExistException;
+import com.example.click_up.exception.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 
 @ControllerAdvice
@@ -37,6 +38,31 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({UserNameExistException.class})
     private ResponseEntity<?> handler(UserNameExistException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler({UsernameNotFoundExceptionn.class})
+    private ResponseEntity<?> handler(UsernameNotFoundExceptionn e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler({UserNotFoundException.class})
+    private ResponseEntity<?> handler(UserNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler({FileNotFoundException.class})
+    private ResponseEntity<?> handler(FileNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler({ExistWorkspaceException.class})
+    private ResponseEntity<?> handler(ExistWorkspaceException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler({WorkspaceNotFoundException.class})
+    private ResponseEntity<?> handler(WorkspaceNotFoundException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 }

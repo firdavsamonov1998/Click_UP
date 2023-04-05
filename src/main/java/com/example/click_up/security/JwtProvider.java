@@ -2,39 +2,38 @@ package com.example.click_up.security;
 
 import com.example.click_up.enums.SystemRole;
 import io.jsonwebtoken.*;
+import org.springframework.stereotype.Component;
 
+import java.util.Base64;
 import java.util.Date;
 
+@Component
 public class JwtProvider {
-    private static final String secretKey = "mazgiTopSecret123!";
+    private static final String secretKey = Base64.getEncoder().encodeToString("secret".getBytes());
     private static final int tokenLiveTime = 1000 * 3600 * 24 * 7;
 
-    public static String encode(String username, SystemRole role) {
-        JwtBuilder jwtBuilder = Jwts.builder();
-        jwtBuilder.setIssuedAt(new Date());
-        jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
-
-        jwtBuilder.claim("username", username);
-
-        jwtBuilder.claim("role", role);
-
-        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));
-        jwtBuilder.setIssuer("DoniyorShifo klinika");
-        return jwtBuilder.compact();
+    public String encode(String username) {
+        return Jwts
+                .builder()
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + tokenLiveTime))
+                .setIssuer("Click up")
+                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .setSubject(username)
+                .compact();
     }
 
-    public static String decodeToken(String token) {
+    public String decodeToken(String token) {
 
         try {
+
             return Jwts
                     .parser()
                     .setSigningKey(secretKey)
                     .parseClaimsJws(token)
                     .getBody()
                     .getSubject();
-
         } catch (Exception e) {
-
             return null;
         }
 

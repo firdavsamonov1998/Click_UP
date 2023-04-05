@@ -6,13 +6,14 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 
 @Getter
 @Setter
 @Entity
+@Component
 public class WorkspaceUser extends AbsEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private WorkSpace workSpace;

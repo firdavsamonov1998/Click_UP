@@ -1,6 +1,5 @@
 package com.example.click_up.entity;
 
-import com.example.click_up.enums.Colors;
 import com.example.click_up.enums.SystemRole;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,6 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "users")
+@Component
 @EntityListeners(AuditingEntityListener.class)
 public class UserEntity extends AbsEntity implements UserDetails {
 
@@ -31,9 +32,7 @@ public class UserEntity extends AbsEntity implements UserDetails {
     private String emailCode;
     @Column
     private boolean enabled = false;
-    @Column
-    @Enumerated(EnumType.STRING)
-    private Colors color;
+
     @Column
     private String initialLetter;
     @OneToOne(fetch = FetchType.LAZY)

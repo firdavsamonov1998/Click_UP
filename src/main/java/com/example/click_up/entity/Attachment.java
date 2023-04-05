@@ -5,11 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
 @Entity(name = "attach")
 @EntityListeners(AuditingEntityListener.class)
+@Component
 public class Attachment extends AbsEntity {
 
     @Column(nullable = false, unique = true)
